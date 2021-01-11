@@ -28,22 +28,6 @@ int elephanttempo = 172;
 int elephantwholenote = (60000 * 4) / elephanttempo;
 int elephantdivider = 0, elephantnoteDuration = 0;
 
-int ussrmelody[] = { // ussr melody
-  NOTE_G4, NOTE_C5, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_E4, NOTE_E4, 
-  NOTE_A4, NOTE_G4, NOTE_F4, NOTE_G4, NOTE_C4, NOTE_C4, 
-  NOTE_D4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5, NOTE_D5, 
-  NOTE_E5, NOTE_D5, NOTE_C5, NOTE_D5, NOTE_B4, NOTE_G4, 
-  NOTE_C5, NOTE_B4, NOTE_A4, NOTE_B4, NOTE_E4, NOTE_E4, 
-  NOTE_A4, NOTE_G4, NOTE_F4, NOTE_G4, NOTE_C4, NOTE_C4, 
-  NOTE_C5, NOTE_B4, NOTE_A4, NOTE_G4, NOTE_B4, NOTE_C5, NOTE_D5, 
-  NOTE_E5, NOTE_D5, NOTE_C5, NOTE_B4, NOTE_C5, NOTE_D5, NOTE_G4, NOTE_G4, NOTE_B4, NOTE_C5, NOTE_D5,
-  NOTE_C5, NOTE_B4, NOTE_A4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_E4, NOTE_E4, NOTE_G4, NOTE_A4, NOTE_B4,
-  NOTE_C5, NOTE_A4, NOTE_B4, NOTE_C5, NOTE_A4, NOTE_B4, NOTE_C5, NOTE_A4, NOTE_C5, NOTE_F5,
-  NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_C5,
-  NOTE_D5, NOTE_C5, NOTE_B4, NOTE_A4, NOTE_B4, NOTE_C5, NOTE_A4, NOTE_A4,
-  NOTE_C5, NOTE_B4, NOTE_A4, NOTE_G4, NOTE_C4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5
-};
-
 int elephantmelody[] = {
   
   NOTE_C4,-8, NOTE_E4,16, NOTE_G4,8, NOTE_C5,8, NOTE_E5,8, NOTE_D5,8, NOTE_C5,8, NOTE_A4,8,
@@ -62,22 +46,6 @@ int elephantmelody[] = {
   NOTE_AS4,8, NOTE_C5,8, REST,4, REST,2,
 };
 int elephantnotes = sizeof(elephantmelody) / sizeof(elephantmelody[0]) / 2;
-
-int ussrnoteDurations[] = { // ussr melody note durations
-  8, 4, 6, 16, 4, 8, 8, 
-  4, 6, 16, 4, 8, 8, 
-  4, 8, 8, 4, 8, 8, 4, 8, 8, 2,
-  4, 6, 16, 4, 8, 8, 
-  4, 6, 16, 4, 8, 8, 
-  4, 6, 16, 4, 6, 16, 
-  4, 6, 16, 8, 8, 8, 8, 
-  2, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8,
-  2, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8,
-  4, 6, 16, 4, 6, 16, 4, 8, 8, 2,
-  2, 8, 8, 8, 8, 3, 8, 2,
-  2, 8, 8, 8, 8, 3, 8, 2,
-  4, 6, 16, 4, 4, 2, 4, 4, 1
-};
 
 // setup
 void setup() {
@@ -136,15 +104,6 @@ void loop() {
 }
 
 // functions
-void ussr() {
-  for (int thisNote = 0; thisNote < sizeof(ussrmelody) / 2; thisNote++) {
-    int noteDuration = 2000 / ussrnoteDurations[thisNote];
-    tone(buzzerpin, ussrmelody[thisNote], noteDuration);
-    int pauseBetweenNotes = noteDuration * 1.30;
-    delay(pauseBetweenNotes);
-    noTone(buzzerpin);
-  }
-}
 
 void classic() {
     for (pos = min_pos; pos <= max_pos; pos += 4) { // goes from 0 degrees to 180 degrees
@@ -185,19 +144,6 @@ void fast() {
    delay(50);  
   }
 
-void withussr() {    
-    for (pos = min_pos; pos <= max_pos; pos += 4) { // goes from 0 degrees to 180 degrees
-      armservo.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(15);                       // waits 15ms for the servo to reach the position
-    }
-    ussr();
-    delay(100);
-    for (pos = max_pos; pos <= min_pos; pos -= 4) { // goes from 0 degrees to 180 degrees
-      armservo.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(15);                       // waits 15ms for the servo to reach the position
-    }
-   delay(50);  
-  }
 
 void withledandbuzzer() {    
     for (pos = min_pos; pos <= med_pos; pos += 8) { // goes from 0 degrees to 180 degrees
